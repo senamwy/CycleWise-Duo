@@ -5,6 +5,7 @@
  */
 
 import { CycleEntry } from '../types';
+import { parseLocalDate, toLocalDateString } from './dateUtils';
 
 export interface HistoricalCycleStats {
   totalCyclesLogged: number;
@@ -73,7 +74,7 @@ export function calculateHistoricalStats(
   if (!entries || entries.length === 0) {
     const defaultStart = new Date(currentDate);
     defaultStart.setDate(defaultStart.getDate() - 14);
-    const startStr = defaultStart.toISOString().split('T')[0];
+    const startStr = toLocalDateString(defaultStart);
     const nextPeriod = new Date(defaultStart);
     nextPeriod.setDate(nextPeriod.getDate() + 28);
     const nextOvulation = new Date(defaultStart);
@@ -90,15 +91,15 @@ export function calculateHistoricalStats(
       confidenceScorePercent: 50,
       estimatedOvulationDay: 14,
       lutealPhaseLength: 14,
-      nextPeriodEstimatedDate: nextPeriod.toISOString().split('T')[0],
+      nextPeriodEstimatedDate: toLocalDateString(nextPeriod),
       nextPeriodConfidenceRange: {
-        minDate: addDaysToDateString(nextPeriod.toISOString().split('T')[0], -3),
-        maxDate: addDaysToDateString(nextPeriod.toISOString().split('T')[0], 3)
+        minDate: addDaysToDateString(toLocalDateString(nextPeriod), -3),
+        maxDate: addDaysToDateString(toLocalDateString(nextPeriod), 3)
       },
-      nextOvulationEstimatedDate: nextOvulation.toISOString().split('T')[0],
+      nextOvulationEstimatedDate: toLocalDateString(nextOvulation),
       nextOvulationConfidenceRange: {
-        minDate: addDaysToDateString(nextOvulation.toISOString().split('T')[0], -2),
-        maxDate: addDaysToDateString(nextOvulation.toISOString().split('T')[0], 2)
+        minDate: addDaysToDateString(toLocalDateString(nextOvulation), -2),
+        maxDate: addDaysToDateString(toLocalDateString(nextOvulation), 2)
       },
       commonSymptoms: []
     };
@@ -141,14 +142,14 @@ export function calculateHistoricalStats(
   const estimatedOvulationDay = Math.max(avgPeriodLength + 2, Math.round(avgCycleLength - lutealLength));
 
   // Next cycle forecast based on latest cycle start
-  const latestStart = new Date(latest.startDate);
+  const latestStart = parseLocalDate(latest.startDate);
   const nextPeriodDate = new Date(latestStart);
   nextPeriodDate.setDate(nextPeriodDate.getDate() + Math.round(avgCycleLength));
-  const nextPeriodStr = nextPeriodDate.toISOString().split('T')[0];
+  const nextPeriodStr = toLocalDateString(nextPeriodDate);
 
   const nextOvulationDate = new Date(latestStart);
   nextOvulationDate.setDate(nextOvulationDate.getDate() + estimatedOvulationDay);
-  const nextOvulationStr = nextOvulationDate.toISOString().split('T')[0];
+  const nextOvulationStr = toLocalDateString(nextOvulationDate);
 
   const marginDays = Math.max(1, Math.ceil(stdDev || 2));
 
@@ -398,21 +399,21 @@ export function generateMultiCycleForecast(
   const avgLen = Math.round(stats.averageCycleLength);
   const ovOffset = stats.estimatedOvulationDay;
 
-  let currentStart = new Date(stats.nextPeriodEstimatedDate);
+  let currentStart = parseLocalDate(stats.nextPeriodEstimatedDate);
 
   for (let i = 1; i <= count; i++) {
-    const startDateStr = currentStart.toISOString().split('T')[0];
+    const startDateStr = toLocalDateString(currentStart);
 
     const ovDate = new Date(currentStart);
     ovDate.setDate(ovDate.getDate() + ovOffset);
-    const ovDateStr = ovDate.toISOString().split('T')[0];
+    const ovDateStr = toLocalDateString(ovDate);
 
     const ovStartWindow = addDaysToDateString(ovDateStr, -2);
     const ovEndWindow = addDaysToDateString(ovDateStr, 1);
 
     const endDate = new Date(currentStart);
     endDate.setDate(endDate.getDate() + avgLen - 1);
-    const endDateStr = endDate.toISOString().split('T')[0];
+    const endDateStr = toLocalDateString(endDate);
 
     // Uncertainty grows slightly with each forecast step
     const confidenceMargin = Math.round((Math.max(1.5, stats.stdDeviationDays || 2) + (i - 1) * 0.8) * 10) / 10;
@@ -440,10 +441,10 @@ export function generateMultiCycleForecast(
 // Helpers
 export function addDaysToDateString(dateStr: string, days: number): string {
   try {
-    const [y, m, d] = dateStr.split('-').map(Number);
-    const dt = new Date(y, m - 1, d);
+    const dt = parseLocalDate(dateStr);
+    if (isNaN(dt.getTime())) return dateStr;
     dt.setDate(dt.getDate() + days);
-    return dt.toISOString().split('T')[0];
+    return toLocalDateString(dt);
   } catch {
     return dateStr;
   }

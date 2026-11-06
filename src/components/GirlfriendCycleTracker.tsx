@@ -34,6 +34,7 @@ import {
 import { CyclePredictionChart } from './CyclePredictionChart';
 import { CycleVisualCalendarView } from './CycleVisualCalendarView';
 import { MilestonesCard } from './MilestonesCard';
+import { toLocalDateString } from '../utils/dateUtils';
 
 interface GirlfriendCycleTrackerProps {
   user: User;
@@ -42,12 +43,12 @@ interface GirlfriendCycleTrackerProps {
 export const GirlfriendCycleTracker: React.FC<GirlfriendCycleTrackerProps> = ({ user }) => {
   const [entries, setEntries] = useState<CycleEntry[]>(() => getCycleEntries(user.id));
   const [activeTab, setActiveTab] = useState<'tracker' | 'predictions'>('tracker');
-  const latestEntry = entries.length > 0 ? entries.sort((a, b) => b.startDate.localeCompare(a.startDate))[0] : null;
+  const latestEntry = entries.length > 0 ? [...entries].sort((a, b) => b.startDate.localeCompare(a.startDate))[0] : null;
 
   // New cycle log modal state
   const [showLogModal, setShowLogModal] = useState(false);
   const [startDate, setStartDate] = useState(
-    latestEntry ? latestEntry.startDate : new Date().toISOString().split('T')[0]
+    latestEntry ? latestEntry.startDate : toLocalDateString()
   );
   const [cycleLength, setCycleLength] = useState(latestEntry?.cycleLengthDays || 28);
   const [periodLength, setPeriodLength] = useState(latestEntry?.periodLengthDays || 5);

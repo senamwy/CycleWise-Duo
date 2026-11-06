@@ -13,6 +13,7 @@ import {
   CalculatedCycleStatus
 } from '../types';
 import { calculateCycleStatus, GIRLFRIEND_DEFAULT_PREFERENCES } from './cycleCalculations';
+import { localDateStringFromToday, toLocalDateString } from './dateUtils';
 
 const STORAGE_KEYS = {
   USERS: 'cyclewise_users',
@@ -71,7 +72,7 @@ const SEED_REMINDERS: PersonalReminder[] = [
     title: 'Wärmflasche & Kräutertee vorbereiten',
     category: 'gesture',
     categoryLabel: 'Kleine Geste',
-    dueDate: new Date(Date.now() + 86400000).toISOString().split('T')[0],
+    dueDate: localDateStringFromToday(1),
     dueTime: '19:30',
     recurring: 'none',
     notes: 'Kamillentee aus dem Schrank, sanfte Musik einschalten',
@@ -84,7 +85,7 @@ const SEED_REMINDERS: PersonalReminder[] = [
     title: 'Abendessen planen: Eisenreiche Gemüsesuppe',
     category: 'household',
     categoryLabel: 'Haushalt & Entlastung',
-    dueDate: new Date(Date.now() + 172800000).toISOString().split('T')[0],
+    dueDate: localDateStringFromToday(2),
     dueTime: '18:00',
     recurring: 'weekly',
     notes: 'Frisches Gemüse auf dem Heimweg besorgen',
@@ -97,7 +98,7 @@ const SEED_REMINDERS: PersonalReminder[] = [
     title: 'Lieblingsblumen & Schokolade besorgen',
     category: 'gesture',
     categoryLabel: 'Kleine Geste',
-    dueDate: new Date().toISOString().split('T')[0],
+    dueDate: toLocalDateString(),
     dueTime: '17:00',
     recurring: 'none',
     notes: 'Dunkle Schokolade 75% + weiße Tulpen',
@@ -162,11 +163,10 @@ export function initializeStorage(): void {
     });
 
     // Seed girlfriend with 4 historical cycles to demonstrate statistical 80%+ prediction
-    const nowMs = Date.now();
-    const cycle1Start = new Date(nowMs - 87 * 86400000).toISOString().split('T')[0];
-    const cycle2Start = new Date(nowMs - 60 * 86400000).toISOString().split('T')[0];
-    const cycle3Start = new Date(nowMs - 31 * 86400000).toISOString().split('T')[0];
-    const cycle4Start = new Date(nowMs - 3 * 86400000).toISOString().split('T')[0];
+    const cycle1Start = localDateStringFromToday(-87);
+    const cycle2Start = localDateStringFromToday(-60);
+    const cycle3Start = localDateStringFromToday(-31);
+    const cycle4Start = localDateStringFromToday(-3);
 
     saveCycleEntry(SEED_GIRLFRIEND.id, {
       startDate: cycle1Start,
@@ -511,10 +511,9 @@ export function deleteCycleEntry(userId: string, entryId: string): void {
  * Seeds a realistic set of 4 historical cycles for any user (e.g. for testing predictions).
  */
 export function seedSampleHistoricalCycles(userId: string): CycleEntry[] {
-  const nowMs = Date.now();
   const sampleData = [
     {
-      startDate: new Date(nowMs - 87 * 86400000).toISOString().split('T')[0],
+      startDate: localDateStringFromToday(-87),
       cycleLengthDays: 27,
       periodLengthDays: 4,
       symptoms: ['cramps', 'bloating'],
@@ -524,7 +523,7 @@ export function seedSampleHistoricalCycles(userId: string): CycleEntry[] {
       notes: 'Sanfter Zyklusbeginn.'
     },
     {
-      startDate: new Date(nowMs - 60 * 86400000).toISOString().split('T')[0],
+      startDate: localDateStringFromToday(-60),
       cycleLengthDays: 29,
       periodLengthDays: 5,
       symptoms: ['fatigue', 'headache'],
@@ -534,7 +533,7 @@ export function seedSampleHistoricalCycles(userId: string): CycleEntry[] {
       notes: 'Stress in der Prüfungsphase.'
     },
     {
-      startDate: new Date(nowMs - 31 * 86400000).toISOString().split('T')[0],
+      startDate: localDateStringFromToday(-31),
       cycleLengthDays: 28,
       periodLengthDays: 5,
       symptoms: ['cramps', 'sweet_cravings'],
@@ -544,7 +543,7 @@ export function seedSampleHistoricalCycles(userId: string): CycleEntry[] {
       notes: 'Viel Kräutertee getrunken.'
     },
     {
-      startDate: new Date(nowMs - 3 * 86400000).toISOString().split('T')[0],
+      startDate: localDateStringFromToday(-3),
       cycleLengthDays: 28,
       periodLengthDays: 5,
       symptoms: ['cramps', 'fatigue'],

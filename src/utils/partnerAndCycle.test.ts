@@ -12,6 +12,7 @@ import {
   saveGirlfriendPreferences
 } from './storage';
 import { User } from '../types';
+import { toLocalDateString } from './dateUtils';
 
 // Mock localStorage for node test environment
 const memoryStore = new Map<string, string>();
@@ -90,7 +91,7 @@ test('granting and revoking consent works immediately in real-time', () => {
   assert.ok(conn !== null);
 
   // Girlfriend logs a cycle entry starting today (Day 1 -> Menstruation)
-  const todayStr = new Date().toISOString().split('T')[0];
+  const todayStr = toLocalDateString();
   saveCycleEntry(gfId, {
     startDate: todayStr,
     cycleLengthDays: 28,

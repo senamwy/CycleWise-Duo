@@ -29,6 +29,7 @@ import {
   Calendar,
   Activity
 } from 'lucide-react';
+import { toLocalDateString } from '../utils/dateUtils';
 
 interface ProfileViewProps {
   user: User;
@@ -96,7 +97,7 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `cyclewise-data-export-${new Date().toISOString().split('T')[0]}.json`;
+    a.download = `cyclewise-data-export-${toLocalDateString()}.json`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);

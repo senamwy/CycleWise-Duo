@@ -1,6 +1,11 @@
-import { User } from '../types';
-import { getPartnerConnectionForUser, getSharingPermissions, getLatestCycleEntry, getCycleEntries } from './storage';
+import { getPartnerConnectionForUser, getSharingPermissions, getLatestCycleEntry } from './storage';
 import { calculateCycleStatus } from './cycleCalculations';
+import { toLocalDateString } from './dateUtils';
+
+/** Days before the next period counted as the late-luteal / PMS window (days 20-28 of a 28-day cycle). */
+const PMS_WINDOW_DAYS = 9;
+/** How many days ahead of the PMS window the early warning starts. */
+const EARLY_WARNING_LEAD_DAYS = 3;
 
 export interface EarlyWarningInfo {
   isActive: boolean;
@@ -60,10 +65,24 @@ export function getEarlyWarningForBoyfriend(boyfriendId: string): EarlyWarningIn
     };
   }
 
-  // High-symptom phases: Luteal phase (Days 20-28) or Menstruation (Days 1-5)
+  // A start date in the future means the cycle hasn't begun yet: nothing to warn about.
+  if (latestCycle.startDate > toLocalDateString()) {
+    return {
+      isActive: false,
+      phaseName: '',
+      daysUntilHighSymptom: -1,
+      reason: '',
+      proactiveSuggestions: []
+    };
+  }
+
+  // High-symptom windows: menstruation, plus the late luteal (PMS) phase, i.e. the last
+  // PMS_WINDOW_DAYS days before the next period. Anchoring to the next period instead of
+  // fixed cycle days keeps the warning correct for cycles shorter or longer than 28 days.
   const currentDay = status.currentDay;
-  const isHighSymptomPhase = (currentDay >= 20 && currentDay <= 28) || (currentDay >= 1 && currentDay <= 5);
-  const isApproachingHighSymptom = currentDay >= 17 && currentDay < 20;
+  const daysUntilPeriod = status.daysUntilNextPeriod;
+  const isHighSymptomPhase = status.phaseNumber === 1 || daysUntilPeriod <= PMS_WINDOW_DAYS;
+  const isApproachingHighSymptom = !isHighSymptomPhase && daysUntilPeriod <= PMS_WINDOW_DAYS + EARLY_WARNING_LEAD_DAYS;
 
   if (isHighSymptomPhase) {
     return {
@@ -78,12 +97,12 @@ export function getEarlyWarningForBoyfriend(boyfriendId: string): EarlyWarningIn
       ]
     };
   } else if (isApproachingHighSymptom) {
-    const daysLeft = 20 - currentDay;
+    const daysLeft = daysUntilPeriod - PMS_WINDOW_DAYS;
     return {
       isActive: true,
       phaseName: 'Lutealphase / Bevorstehende PMS-Phase',
       daysUntilHighSymptom: daysLeft,
-      reason: `Frühe Warnung: In ca. ${daysLeft} Tagen beginnt ihre Lutealphase. Progesteron-Schwankungen können zu erhöhter Empfindlichkeit führen.`,
+      reason: `Frühe Warnung: In ca. ${daysLeft} ${daysLeft === 1 ? 'Tag' : 'Tagen'} beginnt ihre späte Lutealphase (PMS-Fenster). Progesteron-Schwankungen können zu erhöhter Empfindlichkeit führen.`,
       proactiveSuggestions: [
         'Plane das Wochenende eher gemütlich statt stressig.',
         'Übernehme schon jetzt ein paar Aufgaben im Haushalt.',

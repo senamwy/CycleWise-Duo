@@ -44,6 +44,7 @@ import { BoyfriendPartnerCard } from './BoyfriendPartnerCard';
 import { MilestonesCard } from './MilestonesCard';
 import { PartnerMoodTrendChart } from './PartnerMoodTrendChart';
 import { EarlyWarningCard } from './EarlyWarningCard';
+import { toLocalDateString } from '../utils/dateUtils';
 
 interface DashboardViewProps {
   user: User;
@@ -60,7 +61,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   onOpenNewReminder,
   onOpenConnectModal
 }) => {
-  const todayStr = new Date().toISOString().split('T')[0];
+  const todayStr = toLocalDateString();
   const partnerName = user.preferences.partnerName || 'deine Partnerin';
 
   // State loaded from persistent storage

@@ -24,6 +24,7 @@ import {
   Award,
   Filter
 } from 'lucide-react';
+import { localDateStringFromToday } from '../utils/dateUtils';
 
 interface RemindersViewProps {
   user: User;
@@ -52,7 +53,7 @@ export const RemindersView: React.FC<RemindersViewProps> = ({
   const [title, setTitle] = useState(prefillTitle || '');
   const [category, setCategory] = useState<ReminderCategory>(prefillCategory || 'gesture');
   const [dueDate, setDueDate] = useState<string>(
-    new Date(Date.now() + 86400000).toISOString().split('T')[0]
+    localDateStringFromToday(1)
   );
   const [dueTime, setDueTime] = useState<string>('18:00');
   const [recurring, setRecurring] = useState<'none' | 'daily' | 'weekly' | 'monthly'>('none');
@@ -102,7 +103,7 @@ export const RemindersView: React.FC<RemindersViewProps> = ({
     setEditingReminder(null);
     setTitle('');
     setCategory('gesture');
-    setDueDate(new Date(Date.now() + 86400000).toISOString().split('T')[0]);
+    setDueDate(localDateStringFromToday(1));
     setDueTime('18:00');
     setRecurring('none');
     setNotes('');

@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { calculateCycleStatus, MEDICAL_CYCLE_DISCLAIMER } from './cycleCalculations';
 
 test('calculateCycleStatus correctly detects Menstruation phase on day 2', () => {
-  const today = new Date('2026-10-29');
+  const today = new Date(2026, 9, 29);
   const startDate = '2026-10-28'; // Day 2 of cycle
 
   const status = calculateCycleStatus(startDate, 28, 5, today);
@@ -16,7 +16,7 @@ test('calculateCycleStatus correctly detects Menstruation phase on day 2', () =>
 });
 
 test('calculateCycleStatus correctly detects Follicular phase on day 9', () => {
-  const today = new Date('2026-10-29');
+  const today = new Date(2026, 9, 29);
   const startDate = '2026-10-21'; // Day 9 of cycle
 
   const status = calculateCycleStatus(startDate, 28, 5, today);
@@ -27,7 +27,7 @@ test('calculateCycleStatus correctly detects Follicular phase on day 9', () => {
 });
 
 test('calculateCycleStatus correctly detects Ovulation around day 14', () => {
-  const today = new Date('2026-10-29');
+  const today = new Date(2026, 9, 29);
   const startDate = '2026-10-16'; // Day 14 of cycle
 
   const status = calculateCycleStatus(startDate, 28, 5, today);
@@ -38,7 +38,7 @@ test('calculateCycleStatus correctly detects Ovulation around day 14', () => {
 });
 
 test('calculateCycleStatus correctly detects Luteal phase on day 22', () => {
-  const today = new Date('2026-10-29');
+  const today = new Date(2026, 9, 29);
   const startDate = '2026-10-08'; // Day 22 of cycle
 
   const status = calculateCycleStatus(startDate, 28, 5, today);

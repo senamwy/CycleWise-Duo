@@ -38,6 +38,7 @@ import {
   Plus,
   BookOpen
 } from 'lucide-react';
+import { calendarDaysBetween, parseLocalDate } from '../utils/dateUtils';
 
 interface CyclePredictionChartProps {
   user: User;
@@ -70,10 +71,9 @@ export const CyclePredictionChart: React.FC<CyclePredictionChartProps> = ({
     if (entries.length > 0) {
       const sorted = [...entries].sort((a, b) => b.startDate.localeCompare(a.startDate));
       const latest = sorted[0];
-      const startMs = new Date(latest.startDate).getTime();
-      const diffDays = Math.floor((Date.now() - startMs) / (1000 * 60 * 60 * 24));
+      const diffDays = calendarDaysBetween(parseLocalDate(latest.startDate), new Date());
       const len = latest.cycleLengthDays || 28;
-      currentDay = (diffDays % len) + 1;
+      currentDay = diffDays < 0 ? 1 : (diffDays % len) + 1;
     }
     return generateDayByDayPredictionCurve(stats.averageCycleLength, stats.averagePeriodLength, currentDay);
   }, [entries, stats]);

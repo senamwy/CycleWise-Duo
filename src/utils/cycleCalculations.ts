@@ -1,4 +1,5 @@
 import { CalculatedCycleStatus } from '../types';
+import { calendarDaysBetween, parseLocalDate, toLocalDateString } from './dateUtils';
 
 export const MEDICAL_CYCLE_DISCLAIMER =
   'Hinweis: Berechnungen und Phasenangaben beruhen auf statistischen Schätzungen und können vom tatsächlichen biologischen Verlauf abweichen. Nicht als Verhütungsmethode oder Schwangerschaftsdiagnostik geeignet.';
@@ -12,15 +13,13 @@ export function calculateCycleStatus(
   if (!startDateStr) return null;
 
   try {
-    const [year, month, day] = startDateStr.split('-').map(Number);
-    const start = new Date(year, month - 1, day);
-    start.setHours(0, 0, 0, 0);
-
+    const start = parseLocalDate(startDateStr);
     const current = new Date(asOfDate);
     current.setHours(0, 0, 0, 0);
+    if (isNaN(start.getTime()) || isNaN(current.getTime())) return null;
 
-    const diffMs = current.getTime() - start.getTime();
-    if (diffMs < 0) {
+    const totalDaysSinceStart = calendarDaysBetween(start, current);
+    if (totalDaysSinceStart < 0) {
       // Future start date
       return {
         currentDay: 1,
@@ -28,12 +27,11 @@ export function calculateCycleStatus(
         phaseName: 'Menstruation',
         phaseSeason: 'Der innere Winter',
         nextPeriodDate: startDateStr,
-        daysUntilNextPeriod: Math.ceil(Math.abs(diffMs) / (1000 * 60 * 60 * 24)),
+        daysUntilNextPeriod: -totalDaysSinceStart,
         uncertaintyDisclaimer: MEDICAL_CYCLE_DISCLAIMER
       };
     }
 
-    const totalDaysSinceStart = Math.floor(diffMs / (1000 * 60 * 60 * 24));
     const effectiveCycleLength = Math.max(21, Math.min(45, cycleLength || 28));
     const effectivePeriodLength = Math.max(3, Math.min(10, periodLength || 5));
 
@@ -68,7 +66,7 @@ export function calculateCycleStatus(
     const daysUntilNext = effectiveCycleLength - currentDay + 1;
     const nextDate = new Date(current);
     nextDate.setDate(nextDate.getDate() + daysUntilNext);
-    const nextPeriodDate = nextDate.toISOString().split('T')[0];
+    const nextPeriodDate = toLocalDateString(nextDate);
 
     return {
       currentDay,

@@ -4,6 +4,7 @@ import { getDailyNotificationForUser, InAppNotification } from '../utils/notific
 import { triggerHapticFeedback } from '../utils/haptics';
 import { Bell, X, ArrowRight, Sparkles } from 'lucide-react';
 import { NavTab } from './Navigation';
+import { toLocalDateString } from '../utils/dateUtils';
 
 interface NotificationBannerProps {
   user: User;
@@ -16,7 +17,7 @@ export const NotificationBanner: React.FC<NotificationBannerProps> = ({ user, on
 
   useEffect(() => {
     const notif = getDailyNotificationForUser(user);
-    const dismissedKey = `cyclewise_dismissed_${user.id}_${new Date().toISOString().split('T')[0]}`;
+    const dismissedKey = `cyclewise_dismissed_${user.id}_${toLocalDateString()}`;
     if (!localStorage.getItem(dismissedKey)) {
       setNotification(notif);
     }
@@ -26,7 +27,7 @@ export const NotificationBanner: React.FC<NotificationBannerProps> = ({ user, on
 
   const handleDismiss = () => {
     triggerHapticFeedback('light');
-    const dismissedKey = `cyclewise_dismissed_${user.id}_${new Date().toISOString().split('T')[0]}`;
+    const dismissedKey = `cyclewise_dismissed_${user.id}_${toLocalDateString()}`;
     localStorage.setItem(dismissedKey, 'true');
     setDismissed(true);
   };

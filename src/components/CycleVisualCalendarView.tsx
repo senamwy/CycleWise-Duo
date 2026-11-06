@@ -25,6 +25,7 @@ import {
   Dna
 } from 'lucide-react';
 import { saveCycleEntry, getCycleEntries } from '../utils/storage';
+import { parseLocalDate, toLocalDateString } from '../utils/dateUtils';
 
 interface CycleVisualCalendarViewProps {
   user: User;
@@ -43,7 +44,7 @@ export const CycleVisualCalendarView: React.FC<CycleVisualCalendarViewProps> = (
   const [selectedDayDate, setSelectedDayDate] = useState<string | null>(null);
 
   // Day modal state for quick logging/viewing on a specific date
-  const latestEntry = entries.length > 0 ? entries.sort((a, b) => b.startDate.localeCompare(a.startDate))[0] : null;
+  const latestEntry = entries.length > 0 ? [...entries].sort((a, b) => b.startDate.localeCompare(a.startDate))[0] : null;
 
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth(); // 0-indexed
@@ -75,10 +76,10 @@ export const CycleVisualCalendarView: React.FC<CycleVisualCalendarViewProps> = (
   const getDayInfo = (dateStr: string) => {
     // Check if there is an exact entry starting on this date or overlapping
     const matchingEntry = entries.find((e) => {
-      const start = new Date(e.startDate);
+      const start = parseLocalDate(e.startDate);
       const end = new Date(start);
       end.setDate(end.getDate() + (e.cycleLengthDays || 28));
-      const target = new Date(dateStr);
+      const target = parseLocalDate(dateStr);
       return target >= start && target < end;
     });
 
@@ -91,7 +92,7 @@ export const CycleVisualCalendarView: React.FC<CycleVisualCalendarViewProps> = (
       activeEntry.startDate,
       activeEntry.cycleLengthDays,
       activeEntry.periodLengthDays,
-      new Date(dateStr)
+      parseLocalDate(dateStr)
     );
 
     return {
@@ -255,7 +256,7 @@ export const CycleVisualCalendarView: React.FC<CycleVisualCalendarViewProps> = (
 
             const info = cell.info;
             const phaseNum = info?.status?.phaseNumber || 1;
-            const isToday = cell.dateStr === new Date().toISOString().split('T')[0];
+            const isToday = cell.dateStr === toLocalDateString();
 
             // Phase background styling
             let phaseBg = 'bg-[#12121A] border-slate-800 hover:border-slate-700';
