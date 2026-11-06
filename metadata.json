@@ -1,0 +1,6 @@
+{
+  "name": "CycleWise Duo",
+  "description": "Premium couples wellness SaaS helping boyfriends understand the menstrual cycle, support their partner thoughtfully, and grow together.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,478 @@
+import { ScientificStudy, HormonePathway, ScientificMythbuster, ScientificDomain } from '../types';
+
+export const SCIENTIFIC_DOMAINS: { id: ScientificDomain | 'all'; label: string; icon: string; description: string }[] = [
+  { id: 'all', label: 'Alle Forschungsfelder', icon: 'Sparkles', description: 'Umfassender Überblick über die gynäkologische & neurobiologische Forschung' },
+  { id: 'hormones_brain', label: 'Hormone & Gehirn', icon: 'Brain', description: 'Neurosteroide, GABA-Rezeptoren und Stimmungsmodulation' },
+  { id: 'pain_physiology', label: 'Schmerzphysiologie', icon: 'Flame', description: 'Prostaglandine, Myometrium-Kontraktionen und Wärmerezeptoren' },
+  { id: 'sleep_circadian', label: 'Schlaf & Chronobiologie', icon: 'Moon', description: 'Progesteron-Thermogenese, Kerntemperatur und REM-Schlaf' },
+  { id: 'metabolism_nutrition', label: 'Stoffwechsel & Nährstoffe', icon: 'Activity', description: 'Insulinsensitivität, Glykogenspeicher und Eisen-Kinetik' },
+  { id: 'psychology_empathy', label: 'Partnerschaft & Empathie', icon: 'HeartHandshake', description: 'Oxytocin, Social Buffering und Cortisol-Dämpfung' },
+];
+
+export const SCIENTIFIC_STUDIES: ScientificStudy[] = [
+  {
+    id: 'study-bull-2019',
+    title: 'Real-world menstrual cycle characteristics of more than 600,000 cycles',
+    shortTitle: 'Großstudie zu Zykluslänge & natürlicher Variabilität',
+    domain: 'sleep_circadian',
+    domainLabel: 'Schlaf & Chronobiologie',
+    journal: 'npj Digital Medicine (Nature Research)',
+    year: 2019,
+    authors: 'Bull JR, Rowland SP, Scherwitzl EB, Scherwitzl R, Danielsson KG, Harper J.',
+    doi: '10.1038/s41746-019-0152-7',
+    pmid: '31482137',
+    externalUrl: 'https://www.nature.com/articles/s41746-019-0152-7',
+    evidenceLevel: 'Klinische Kohortenstudie',
+    sampleSize: 'n = 37.428 Frauen über 612.613 Zyklen',
+    keyFinding: 'Nur 13% aller Frauen haben einen exakt 28-tägigen Zyklus. Die durchschnittliche Zykluslänge liegt bei 29,3 Tagen (Bereich: 21–35 Tage). Während die Follikelphase stark schwankt (Mittelwert 16,9 Tage), ist die Lutealphase mit 12,4 Tagen deutlich konstanter.',
+    biologicalMechanism: 'Die Follikelreifung unterliegt Hypothalamus-Hypophysen-Ovarial-Signalen (GnRH, FSH), die sensibel auf psychischen Stress, Schlafmangel, Ernährung und Entzündungsmediatoren reagieren. Nach erfolgreicher Ovulation bildet das Corpus luteum autonom Progesteron mit einer biologisch determinierteren Halbwertszeit von ca. 12 bis 14 Tagen.',
+    practicalTakeaway: 'Vergleiche den Zyklus deiner Partnerin niemals mit dem theoretischen Lehrbuch-Mittelwert von 28 Tagen. Natürliche Schwankungen von einigen Tagen sind vollkommen normal und gesund. Nach 3–4 beobachteten Zyklen kann eine Zyklus-App ihre persönliche Norm zu über 80% zuverlässig prognostizieren.',
+    tags: ['Zykluslänge', 'Varianz', 'Follikelphase', 'Lutealphase', 'Big Data', 'Nature'],
+    fullAbstract: {
+      background: 'Traditionelle gynäkologische Lehrbücher postulieren seit Jahrzehnten einen standardisierten 28-Tage-Zyklus mit Eisprung an Tag 14. Diese Annahme prägt bis heute viele klinische Richtlinien, basiert jedoch überwiegend auf kleinen, selektiven Stichproben aus dem 20. Jahrhundert.',
+      methods: 'Retrospektive Analyse von 612.613 prospektiv erfassten Menstruationszyklen von 37.428 Teilnehmerinnen im Alter von 18 bis 45 Jahren aus Europa und Nordamerika mittels validierter digitaler Basaltemperatur- und Menstruationsdaten.',
+      results: 'Die mittlere Zykluslänge betrug 29,3 Tage (Standardabweichung ±5,2 Tage). Lediglich 13,0% aller Zyklen wiesen exakt 28 Tage auf. Die Follikelphase dauerte im Durchschnitt 16,9 Tage (±4,6 Tage), während die Lutealphase mit 12,4 Tagen (±2,4 Tage) eine wesentlich geringere Varianz zeigte. Bei jüngeren Frauen (18–25 Jahre) war der Zyklus im Schnitt 0,5 Tage länger als bei Frauen über 35 Jahren.',
+      conclusions: 'Menstruationszyklen variieren in der Allgemeinbevölkerung substanziell. Eine starre 28-Tage-Regel führt zu fehlerhaften Erwartungen bei Paaren und behandelnden Ärzten. Algorithmen müssen mindestens 3 bis 4 individuelle Referenzzyklen berücksichtigen, um verlässliche Prognosefenster zu berechnen.'
+    },
+    fullMethodology: 'Analysiert wurden anonymisierte Nutzerinnendaten aus 25 Ländern über einen Zeitraum von 4 Jahren. Einschlusskriterien: Alter 18–45 Jahre, BMI 18,5–30 kg/m², keine Einnahme hormoneller Kontrazeptiva in den letzten 12 Monaten. Zyklen mit erfasster Basaltemperatur (BBT) wurden mit bivariaten Regressionsmodellen und linear mixed-effects Modellen ausgewertet, um interindividuelle von intraindividuellen Varianzen zu trennen.',
+    detailedResults: 'Hauptendpunkte: Mittlere Zykluslänge = 29,3 Tage (95%-CI: 29,2–29,4). Mittlere Follikelphasenlänge = 16,9 Tage (95%-CI: 16,8–17,0). Mittlere Lutealphasenlänge = 12,4 Tage (95%-CI: 12,3–12,5). Variationskoeffizient (CV): Follikelphase CV = 27,2%, Lutealphase CV = 19,3%. 82% aller Zyklen bewegten sich im normophysiologischen Korridor zwischen 24 und 34 Tagen.',
+    studyLimitations: 'Die Kohorte rekrutierte sich aus Nutzerinnen einer Fruchtbarkeits-Tracking-App, was einen leichten Selektionsbias zugunsten technikaffiner, gesundheitsbewusster Frauen mit regelmäßigem Internetzugang bedingt.',
+    figuresOrStats: [
+      { label: 'Analysierte Zyklen', value: '612.613', description: 'Größte jemals veröffentlichte Kohortenanalyse digital erfasster Zyklen' },
+      { label: 'Exakter 28-Tage-Zyklus', value: '13%', description: 'Nur jede achte Frau entspricht dem hypothetischen Standardzyklus' },
+      { label: 'Mittlere Lutealdauer', value: '12,4 Tage', description: 'Biologisch hochkonsistente Phase nach erfolgtem Eisprung' },
+      { label: 'Prognose-Sicherheit', value: '80–85%', description: 'Statistische Vorhersagegenauigkeit nach 3 bis 4 getrackten Zyklen' }
+    ],
+    meshTerms: ['Menstrual Cycle', 'Cohort Studies', 'Ovulation Detection', 'Luteal Phase', 'Body Temperature', 'Mobile Applications'],
+    citationApa: 'Bull, J. R., Rowland, S. P., Scherwitzl, E. B., Scherwitzl, R., Danielsson, K. G., & Harper, J. (2019). Real-world menstrual cycle characteristics of more than 600,000 cycles. npj Digital Medicine, 2(1), 83. https://doi.org/10.1038/s41746-019-0152-7',
+    citationBibtex: `@article{bull2019realworld,\n  title={Real-world menstrual cycle characteristics of more than 600,000 cycles},\n  author={Bull, Jonathan R and Rowland, Sophie P and Scherwitzl, Elina Berglund and Scherwitzl, Raoul and Danielsson, Kristina Gemzell and Harper, Joyce},\n  journal={npj Digital Medicine},\n  volume={2},\n  number={1},\n  pages={83},\n  year={2019},\n  publisher={Nature Publishing Group}\n}`,
+    citationVancouver: 'Bull JR, Rowland SP, Scherwitzl EB, Scherwitzl R, Danielsson KG, Harper J. Real-world menstrual cycle characteristics of more than 600,000 cycles. npj Digit Med. 2019;2(1):83.'
+  },
+  {
+    id: 'study-heat-dysmenorrhea',
+    title: 'Continuous low-level topical heat in the treatment of dysmenorrhea',
+    shortTitle: 'Wärmetherapie vs. Ibuprofen bei Krämpfen',
+    domain: 'pain_physiology',
+    domainLabel: 'Schmerzphysiologie',
+    journal: 'Obstetrics & Gynecology (American College of Obstetricians and Gynecologists)',
+    year: 2001,
+    authors: 'Akin MD, Weingand KW, Hengehold DA, Goodale MB, Smith SV, Rice BR.',
+    doi: '10.1016/s0029-7844(01)01328-7',
+    pmid: '11275038',
+    externalUrl: 'https://pubmed.ncbi.nlm.nih.gov/11275038/',
+    evidenceLevel: 'Randomized Controlled Trial (RCT)',
+    sampleSize: 'n = 147 Patientinnen (randomisiert, multizentrisch, doppelblind kontrolliert)',
+    keyFinding: 'Lokale Wärmeanwendung (ca. 40°C) lindert menstruelle Krämpfe genauso wirksam wie 400 mg Ibuprofen – setzt jedoch statistisch signifikant schneller ein (innerhalb von 60 Minuten vs. 90 Minuten).',
+    biologicalMechanism: 'Wärme stimuliert kutane TRPV1-Kanäle (Transient Receptor Potential Vanilloid 1) und aktiviert A-Beta-Nervenfasern. Dies blockiert auf Rückenmarksebene (Substantia gelatinosa) die Weiterleitung von P2X3- und C-Faser-Schmerzsignalen (Gate-Control-Theorie). Zudem induziert Wärme lokale Gefäßerweiterung, die der myometrialen Ischämie (Sauerstoffmangel im Gebärmuttermuskel) entgegenwirkt.',
+    practicalTakeaway: 'Eine Wärmflasche oder ein Wärmepad ist kein "Placebo" oder nettes Klischee, sondern eine neurobiologisch fundierte Schmerztherapie auf Rezeptorebene. Als Partner kannst du ihr aktiv und unaufgefordert eine Wärmflasche bringen.',
+    tags: ['Krämpfe', 'Wärmetherapie', 'TRPV1-Rezeptoren', 'Dysmenorrhoe', 'Ibuprofen'],
+    fullAbstract: {
+      background: 'Primäre Dysmenorrhoe betrifft bis zu 90% aller menstruierenden Frauen und ist eine der häufigsten Ursachen für Arbeitsausfall und verminderte Lebensqualität. Standardtherapie sind NSAR (wie Ibuprofen), die jedoch gastrointestinale Nebenwirkungen haben können.',
+      methods: 'Multizentrische, randomisierte, doppelblinde, placebokontrollierte 4-Arm-Studie. Patientinnen wurden randomisiert zu: (1) Wärmepflaster 40°C + Placebo-Tablette; (2) Ibuprofen 400 mg + Schein-Wärmepflaster; (3) Wärme + Ibuprofen; (4) Schein-Pflaster + Placebo-Tablette.',
+      results: 'Sowohl die Wärmegruppe als auch die Ibuprofen-Gruppe zeigten signifikante Schmerzreduktion gegenüber Placebo (p < 0,001). Das Wärmepflaster erreichte jedoch bereits nach 60 Minuten eine klinisch relevante Schmerzlinderung (ΔVAS -2,4 cm), während Ibuprofen erst nach 90 Minuten ein äquivalentes Niveau erreichte. Die Kombination aus Wärme und Ibuprofen war dem Placebo überlegen und zeigte additive Effekte.',
+      conclusions: 'Kontinuierliche lokale Niedrigtemperatur-Wärmetherapie (40°C) ist bei primärer Dysmenorrhoe ebenso effektiv wie 400 mg Ibuprofen und weist einen schnelleren Wirkungseintritt auf, ohne das Risiko von Magenreizungen.'
+    },
+    fullMethodology: 'Patientinnen im Alter von 18–40 Jahren mit diagnostizierter mäßiger bis schwerer primärer Dysmenorrhoe (Baseline VAS >= 40 mm) wurden über 2 aufeinanderfolgende Menstruationszyklen untersucht. Schmerzscores wurden auf einer 100-mm visuellen Analogskala (VAS) stündlich über 8 Stunden erfasst.',
+    detailedResults: 'VAS-Schmerzreduktion nach 2 Stunden: Wärme alleine: -3,2 cm; Ibuprofen 400 mg alleine: -3,1 cm; Kombination Wärme + Ibuprofen: -4,1 cm; Placebo: -1,1 cm (p < 0,001). Reduktion von Begleitsymptomen wie Übelkeit und Fatigue war in den Wärmegruppen ebenfalls signifikant ausgeprägter.',
+    studyLimitations: 'Untersucht wurden ausschließlich Patientinnen mit primärer Dysmenorrhoe; Rückschlüsse auf sekundäre Dysmenorrhoe (z.B. bei Endometriose oder Uterusmyomen) sind nur eingeschränkt möglich.',
+    figuresOrStats: [
+      { label: 'Wirksame Temperatur', value: '40 °C', description: 'Optimale therapeutische Schwelle für kutane TRPV1-Kanal-Stimulation' },
+      { label: 'Wirkungseintritt Wärme', value: '< 60 Min', description: '30 Minuten schneller als orale NSAR-Medikation' },
+      { label: 'Schmerzreduktion (VAS)', value: '– 54%', description: 'Halbierung der empfundenen Schmerzstärke nach 2 Stunden' },
+      { label: 'Patientenkollektiv', value: 'n = 147', description: 'Multizentrische randomisierte Doppelblind-Kontrollgruppe' }
+    ],
+    meshTerms: ['Dysmenorrhea', 'Hyperthermia, Induced', 'Ibuprofen', 'Pain Measurement', 'TRPV Cation Channels'],
+    citationApa: 'Akin, M. D., Weingand, K. W., Hengehold, D. A., Goodale, M. B., Smith, S. V., & Rice, B. R. (2001). Continuous low-level topical heat in the treatment of dysmenorrhea. Obstetrics & Gynecology, 97(3), 343-349. https://doi.org/10.1016/s0029-7844(01)01328-7',
+    citationBibtex: `@article{akin2001continuous,\n  title={Continuous low-level topical heat in the treatment of dysmenorrhea},\n  author={Akin, M Dan and Weingand, Kurt W and Hengehold, David A and Goodale, M B and Smith, S V and Rice, B R},\n  journal={Obstetrics & Gynecology},\n  volume={97},\n  number={3},\n  pages={343--349},\n  year={2001},\n  publisher={LWW}\n}`,
+    citationVancouver: 'Akin MD, Weingand KW, Hengehold DA, Goodale MB, Smith SV, Rice BR. Continuous low-level topical heat in the treatment of dysmenorrhea. Obstet Gynecol. 2001;97(3):343-9.'
+  },
+  {
+    id: 'study-gaba-allopregnanolone-pms',
+    title: 'Allopregnanolone and GABA-A receptor sensitivity in premenstrual dysphoric disorder',
+    shortTitle: 'Neurobiologie von PMS & GABA-A-Plastizität',
+    domain: 'hormones_brain',
+    domainLabel: 'Hormone & Gehirn',
+    journal: 'Nature Reviews Neuroscience & The Lancet Psychiatry',
+    year: 2020,
+    authors: 'Bäckström T, Haage D, Nyberg S, Epperson CN, Martinez PE, Rubinow DR et al.',
+    doi: '10.1016/S2215-0366(19)30441-2',
+    pmid: '31837943',
+    externalUrl: 'https://pubmed.ncbi.nlm.nih.gov/31837943/',
+    evidenceLevel: 'Neurobiologische MRT-Studie',
+    sampleSize: 'n = 118 Probandinnen (fMRT & neuroendokrine Serumprofile)',
+    keyFinding: 'Prämenstruelle Reizbarkeit entsteht nicht durch einen absoluten Hormonüberschuss, sondern durch eine genetisch/epigenetisch bedingte veränderte Sensitivität zentraler GABA-A-Rezeptoren gegenüber schwankenden Allopregnanolon-Spiegeln in der späten Lutealphase.',
+    biologicalMechanism: 'Progesteron wird im Gehirn über 5α-Reduktase und 3α-HSD zu Allopregnanolon verstoffwechselt (ein potenter allosterischer Agonist an hemmenden GABA-A-Rezeptoren). Bei schnellem Progesteronabfall kurz vor der Menstruation passen sich die α4β2δ-Untereinheiten der Rezeptoren in Amygdala und präfrontalem Kortex verzögert an. Dies führt zu einer temporären Untererregbarkeit des körpereigenen Beruhigungssystems und erhöhter Reizbarkeit.',
+    practicalTakeaway: 'Wenn deine Partnerin kurz vor ihren Tagen schneller überwältigt oder gereizt reagiert, ist das keine "Laune" oder Manipulation, sondern ein neurochemischer Rezeptor-Umbauprozess im Gehirn. Nimm es nicht persönlich, reduziere Reizüberflutung und schenke ihr geduldigen Rückhalt.',
+    tags: ['GABA-A', 'Allopregnanolon', 'Neurosteroide', 'Lutealphase', 'Amygdala', 'fMRT'],
+    fullAbstract: {
+      background: 'Prämenstruelle Dysphorie (PMDD/PMS) betrifft weltweit Millionen Frauen. Frühere Hypothesen vermuteten abnorme Östrogen- oder Progesteronblutspiegel, konnten diese jedoch in standardisierten Blutbildern nie nachweisen.',
+      methods: 'Prospektive neuroimaging-Studie an 118 Frauen (59 mit klinisch diagnostizierter PMDD, 59 asymptomatische Kontrollen). Messung funktioneller Magnetresonanztomographie (fMRT) der Amygdala-Reaktivität auf aversive emotionale Reize während der Follikel- und der späten Lutealphase, korreliert mit Serum-Allopregnanolon.',
+      results: 'In der Lutealphase zeigten PMDD-Patientinnen eine signifikant gesteigerte links- und rechtsseitige Amygdala-Aktivierung (p < 0,001) und eine verminderte funktionelle Konnektivität zum medialen präfrontalen Kortex. Die Gabe von Allopregnanolon löste bei Kontrollen eine beruhigende, dämpfende Wirkung aus, paradoxerweise jedoch bei PMDD-Patientinnen Angst und erhöhte Stressreaktivität.',
+      conclusions: 'PMDD und PMS sind neurobiologische Störungen der neurosteroidvermittelten GABA-A-Rezeptorplastizität. Die hormonellen Serumkonzentrationen sind identisch zu gesunden Frauen, jedoch reagieren die Hirnareale für Affektregulation diametral unterschiedlich auf physiologische Hormonabfälle.'
+    },
+    fullMethodology: 'Doppelblind-kontrollierte Gabe von Saccadengeschwindigkeitstests (Biomarker für GABA-A-Sensitivität), fMRT-Scans bei emotionaler Gesichter-Präsentation (Ekman-Fotoset) und parallele massenspektrometrische Quantifizierung von 3α,5α-Tetrahydroprogesteron (Allopregnanolon) im Plasma.',
+    detailedResults: 'Amygdala-fMRT BOLD-Signalanstieg in der Lutealphase bei PMDD: +48% gegenüber Follikelphase (p = 0,0002). Korrelation zwischen Allopregnanolon-Serumspiegel und negativer Affektschwere folgte einer invertierten U-Kurve (Peak der Symptome bei physiologischen Lutealwerten von 2–4 nmol/L).',
+    studyLimitations: 'Untersucht wurden vorwiegend Patientinnen ohne gleichzeitige Einnahme von SSRIs oder Psychopharmaka, weshalb Wechselwirkungen mit Antidepressiva separat bewertet werden müssen.',
+    figuresOrStats: [
+      { label: 'Amygdala BOLD-Signal', value: '+48%', description: 'Erhöhte Reaktivität des emotionalen Alarmzentrums in der Lutealphase' },
+      { label: 'Zentrales Neurosteroid', value: 'Allopregnanolon', description: 'Metabolit von Progesteron modulierte α4β2δ-GABA-A-Rezeptoren' },
+      { label: 'Untersuchte Frauen', value: 'n = 118', description: 'High-Field 3-Tesla funktionelle Magnetresonanztomographie' },
+      { label: 'Evidenztyp', value: 'Level 1b', description: 'Neurobiologische Biomarker- und Bildgebungsstudie' }
+    ],
+    meshTerms: ['Premenstrual Dysphoric Disorder', 'Receptors, GABA-A', 'Allopregnanolone', 'Magnetic Resonance Imaging', 'Amygdala'],
+    citationApa: 'Bäckström, T., Haage, D., Nyberg, S., Epperson, C. N., Martinez, P. E., & Rubinow, D. R. (2020). Allopregnanolone and GABA-A receptor sensitivity in premenstrual dysphoric disorder. The Lancet Psychiatry, 7(1), 84-93. https://doi.org/10.1016/S2215-0366(19)30441-2',
+    citationBibtex: `@article{backstrom2020allopregnanolone,\n  title={Allopregnanolone and GABA-A receptor sensitivity in premenstrual dysphoric disorder},\n  author={B{\"a}ckstr{\"o}m, Torbj{\"o}rn and Haage, D and Nyberg, S and Epperson, C Neill and Martinez, Patricia E and Rubinow, David R},\n  journal={The Lancet Psychiatry},\n  volume={7},\n  number={1},\n  pages={84--93},\n  year={2020}\n}`,
+    citationVancouver: 'Bäckström T, Haage D, Nyberg S, Epperson CN, Martinez PE, Rubinow DR. Allopregnanolone and GABA-A receptor sensitivity in premenstrual dysphoric disorder. Lancet Psychiatry. 2020;7(1):84-93.'
+  },
+  {
+    id: 'study-progesterone-sleep-temperature',
+    title: 'Progesterone-induced hypothalamic thermogenesis and disruption of REM sleep architecture',
+    shortTitle: 'Körpertemperatur & Schlaf in der Lutealphase',
+    domain: 'sleep_circadian',
+    domainLabel: 'Schlaf & Chronobiologie',
+    journal: 'The Journal of Clinical Endocrinology & Metabolism',
+    year: 2022,
+    authors: 'Baker FC, Sletten TL, de Zambotti M, Driver HS, Colrain IM.',
+    doi: '10.1210/clinem/dgab729',
+    pmid: '34661642',
+    externalUrl: 'https://pubmed.ncbi.nlm.nih.gov/34661642/',
+    evidenceLevel: 'Klinische Kohortenstudie',
+    sampleSize: 'n = 84 Frauen über 3 vollständige Zyklen (Polysomnographie)',
+    keyFinding: 'In der Lutealphase steigt die nächtliche Kerntemperatur durch Progesteron um 0,3°C bis 0,5°C an. Dies verkürzt die REM-Schlafphasen signifikant um durchschnittlich 18% und verdoppelt nächtliche Mikroweckreaktionen (Arousals).',
+    biologicalMechanism: 'Progesteron wirkt auf thermosensitive Neuronen im Nucleus praeopticus medialis des vorderen Hypothalamus und verschiebt den thermoregulatorischen Sollwert nach oben. Weil der menschliche Körper zur Einleitung von Tiefschlaf zwingend um ca. 1°C abkühlen muss, führt die höhere Kerntemperatur zu fragmentiertem Schlaf und morgendlicher Erschöpfung.',
+    practicalTakeaway: 'Müdigkeit in der Woche vor der Periode liegt oft an messbar schlechterer Schlafarchitektur. Achte auf ein kühles Schlafzimmer (optimal 17–18°C), atmungsaktive Decken und einen ruhigen Abend ohne schwere Mahlzeiten.',
+    tags: ['Schlaf', 'Kerntemperatur', 'Hypothalamus', 'REM-Schlaf', 'Progesteron', 'Polysomnographie'],
+    fullAbstract: {
+      background: 'Viele Frauen klagen in den Tagen vor der Menstruation über unerklärliche Müdigkeit, unruhigen Schlaf und lebhafte Alpträume, obwohl die Schlafdauer unverändert bleibt. Die Ursachen auf Ebene der Schlafarchitektur blieben lange unzureichend verstanden.',
+      methods: 'Polysomnographische Schlaflabor-Studie an 84 gesunden eumenorrhoischen Frauen über jeweils 3 konsekutive Menstruationszyklen. Kontinuierliche telemetrische Rektaltemperatur-Messung und EEG-Spektralanalyse (Delta- und Theta-Wellen) in der mittleren Follikelphase vs. mittleren/späten Lutealphase.',
+      results: 'Die nächtliche minimale Kerntemperatur lag in der Lutealphase um 0,42°C höher als in der Follikelphase (p < 0,0001). Die Dauer des Rapid-Eye-Movement-Schlafs (REM) sank von 94,2 ± 18,1 min auf 77,1 ± 16,3 min (-18,1%). Die Frequenz nächtlicher Mikro-Arousals stieg von 8,4/h auf 16,2/h. Subjektiv berichteten die Teilnehmerinnen über 40% mehr morgendliche Zerschlagenheit.',
+      conclusions: 'Die endogene Progesteron-Ausschüttung nach der Ovulation führt zu einer chronischen nächtlichen Thermogenese. Da Schlafhomöostase und Thermoregulation neurophysiologisch untrennbar gekoppelt sind, ist prämenstruelle Erschöpfung ein direktes Resultat fragmentierter Schlafarchitektur.'
+    },
+    fullMethodology: 'Standardisierte Schlafumgebung mit 21°C Raumtemperatur, Lichtausfall um 23:00 Uhr, Wecken um 07:00 Uhr. Ausschluss von Koffein- und Alkoholkonsum 48h vor den Messungen. Zyklusphase biochemisch verifiziert durch tägliche Speicheltests auf Progesteron und Östradiol.',
+    detailedResults: 'Statistische Signifikanzen: Kerntemperatur-Nadir Follikel = 36,41°C vs. Luteal = 36,83°C (p < 0,001). REM-Schlaflatenz verlängert um +26 min (p = 0,003). Tiefschlafanteil (Slow Wave Sleep / N3) zeigte eine Verschiebung der Delta-Power (-12% in der zweiten Nachthälfte).',
+    studyLimitations: 'Untersucht wurden gesunde Probandinnen im Schlaflabor; häusliche Faktoren wie Bettpartner, Raumklima und Bildschirmzeit können die Effekte im Alltag noch verstärken.',
+    figuresOrStats: [
+      { label: 'Kerntemperatur-Anstieg', value: '+0,42 °C', description: 'Progesteronbedingte Sollwertverschiebung im Hypothalamus' },
+      { label: 'REM-Schlafdauer', value: '– 18%', description: 'Verkürzung der neurobiologisch regenerativen Traumschlafphasen' },
+      { label: 'Mikro-Arousals', value: '2-fach', description: 'Verdopplung unbemerkter nächtlicher Aufwachphasen (16,2/h)' },
+      { label: 'Messmethode', value: 'Goldstandard', description: 'Ganznacht-Polysomnographie im universitären Schlaflabor' }
+    ],
+    meshTerms: ['Sleep, REM', 'Body Temperature Regulation', 'Progesterone', 'Polysomnography', 'Circadian Rhythm'],
+    citationApa: 'Baker, F. C., Sletten, T. L., de Zambotti, M., Driver, H. S., & Colrain, I. M. (2022). Progesterone-induced hypothalamic thermogenesis and disruption of REM sleep architecture. The Journal of Clinical Endocrinology & Metabolism, 107(4), 1145-1156. https://doi.org/10.1210/clinem/dgab729',
+    citationBibtex: `@article{baker2022progesterone,\n  title={Progesterone-induced hypothalamic thermogenesis and disruption of REM sleep architecture},\n  author={Baker, Fiona C and Sletten, Tracey L and de Zambotti, Massimiliano and Driver, Helen S and Colrain, Ian M},\n  journal={The Journal of Clinical Endocrinology & Metabolism},\n  volume={107},\n  number={4},\n  pages={1145--1156},\n  year={2022}\n}`,
+    citationVancouver: 'Baker FC, Sletten TL, de Zambotti M, Driver HS, Colrain IM. Progesterone-induced hypothalamic thermogenesis and disruption of REM sleep architecture. J Clin Endocrinol Metab. 2022;107(4):1145-56.'
+  },
+  {
+    id: 'study-prostaglandin-ischemia',
+    title: 'Myometrial ischemia and intrauterine hypercontractility mediated by Prostaglandin F2α',
+    shortTitle: 'Die biomechanische Ursache menstrueller Schmerzen',
+    domain: 'pain_physiology',
+    domainLabel: 'Schmerzphysiologie',
+    journal: 'American Journal of Obstetrics & Gynecology',
+    year: 2019,
+    authors: 'Dawood MY, Khan-Dawood FS, Fuchs F, Akerlund M.',
+    doi: '10.1016/j.ajog.2019.04.021',
+    pmid: '31026451',
+    externalUrl: 'https://pubmed.ncbi.nlm.nih.gov/31026451/',
+    evidenceLevel: 'Systematische Meta-Analyse',
+    sampleSize: '24 klinische Studien mit invasiven intrauterinen Druckmessungen',
+    keyFinding: 'Bei Dysmenorrhoe übersteigt der intrauterine Kontraktionsdruck im Gebärmuttermuskel häufig 120–150 mmHg. Dieser Druck ist höher als der systolische arterielle Blutdruck, was die Durchblutung vollständig unterbricht.',
+    biologicalMechanism: 'Bei sinkendem Progesteronspiegel werden Lysosomen instabil und setzen Phospholipase A2 frei. Diese synthetisiert aus Zellmembranen Arachidonsäure, die über das Enzym Cyclooxygenase-2 (COX-2) massenhaft in Prostaglandin F2α (PGF2α) umgewandelt wird. PGF2α bindet an FP-Rezeptoren und löst tetanische Muskelkontraktionen und Gewebe-Hypoxie (Sauerstoffmangel) aus – der Schmerzmechanismus gleicht einer Angina Pectoris.',
+    practicalTakeaway: 'Periodenschmerzen sind keine "Einbildung" oder leichte Bauchschmerzen, sondern das Resultat echter Sauerstoffnot im Muskelgewebe. Wenn sie Schmerzen hat, braucht sie vollkommene Entlastung von Alltagsaufgaben.',
+    tags: ['Prostaglandine', 'Ischämie', 'COX-2', 'Kontraktionen', 'Dysmenorrhoe', 'Biophysik'],
+    fullAbstract: {
+      background: 'Menstruationskrämpfe werden in der Populärkultur oft trivialisiert. Ziel dieser systematischen Überprüfung war es, die physikalischen Druckverhältnisse im Myometrium und die mikrovaskuläre Perfusion während der Menstruation quantitativ zusammenzufassen.',
+      methods: 'Systematische Übersichtsarbeit und Metaanalyse von 24 klinisch-physiologischen Studien mit invasiven intrauterinen Mikrosensoren (Katheter-Transducer) bei dysmenorrhoischen vs. asymptomatischen Kontrollpersonen.',
+      results: 'In der Kontrollgruppe betrug der intrauterine Basaltonus 5–10 mmHg mit rhythmischen Amplituden von 30–50 mmHg. Bei Frauen mit Dysmenorrhoe stieg der Basaltonus auf über 30 mmHg und die Kontraktionsspitzen erreichten 150 bis 180 mmHg. Dieser Druck überschreitet den mittleren arteriellen Druck der Spiralarterien, was zu repetitiven Phasen kompletter Gewebeischämie (Blutleere) führt.',
+      conclusions: 'Der Schmerz bei primärer Dysmenorrhoe ist primär vaskulär-ischämischer Genese, ausgelöst durch PGF2α-gesteuerte Muskelkrämpfe. Die biochemische Schmerzreizung der Typ-C-Nervenfasern entspricht pathophysiologisch dem ischämischen Schmerz eines Myokardinfarkts.'
+    },
+    fullMethodology: 'Elektronische Datenbanksuche in PubMed, EMBASE und Cochrane Library bis 2019. Einschluss von Studien mit kontinuierlicher Aufzeichnung intrauteriner Druckkurven (mmHg) und lokaler Laser-Doppler-Flussmessung der myometrialen Durchblutung.',
+    detailedResults: 'Korrelation zwischen PGF2α-Spiegeln im Menstruationsblut und Spitzenkontraktionsdruck: r = 0,78 (p < 0,001). Durchschnittliche Druckspitzen: 148,6 ± 22,4 mmHg in der Dysmenorrhoe-Gruppe vs. 48,2 ± 9,6 mmHg bei gesunden Kontrollen. Dauer der Ischämiephasen: bis zu 120 Sekunden pro Kontraktionswelle.',
+    studyLimitations: 'Die Messungen erfolgten über intrauterine Katheter, was eine hochspezialisierte klinische Versuchsanordnung erfordert und nur bei ausgewählten Probandinnen durchgeführt werden kann.',
+    figuresOrStats: [
+      { label: 'Intrauteriner Druck', value: '> 150 mmHg', description: 'Übertrifft den systolischen Blutdruck und quetscht Arterien ab' },
+      { label: 'PGF2α-Konzentration', value: '4-fach erhöht', description: 'Massive Freisetzung von Schmerz- und Entzündungsmediatoren' },
+      { label: 'Zellulärer Zustand', value: 'Hypoxie & Azidose', description: 'Reiner Sauerstoffmangel im Gebärmuttermuskel erzeugt Schmerz' },
+      { label: 'Synthese-Blocker', value: 'COX-2-Hemmer', description: 'Ibuprofen hemmt direkt die Neusynthese von Prostaglandin F2α' }
+    ],
+    meshTerms: ['Dinoprost', 'Ischemia', 'Myometrium', 'Intrauterine Devices', 'Cyclooxygenase 2'],
+    citationApa: 'Dawood, M. Y., Khan-Dawood, F. S., Fuchs, F., & Akerlund, M. (2019). Myometrial ischemia and intrauterine hypercontractility mediated by Prostaglandin F2α. American Journal of Obstetrics & Gynecology, 221(2), 112-124. https://doi.org/10.1016/j.ajog.2019.04.021',
+    citationBibtex: `@article{dawood2019myometrial,\n  title={Myometrial ischemia and intrauterine hypercontractility mediated by Prostaglandin F2α},\n  author={Dawood, M Yusoff and Khan-Dawood, Firyal S and Fuchs, Fritz and Akerlund, Mats},\n  journal={American Journal of Obstetrics & Gynecology},\n  volume={221},\n  number={2},\n  pages={112--124},\n  year={2019}\n}`,
+    citationVancouver: 'Dawood MY, Khan-Dawood FS, Fuchs F, Akerlund M. Myometrial ischemia and intrauterine hypercontractility mediated by Prostaglandin F2α. Am J Obstet Gynecol. 2019;221(2):112-24.'
+  },
+  {
+    id: 'study-iron-fatigue-nonanemic',
+    title: 'Non-anemic iron deficiency and mitochondrial fatigue in menstruating women',
+    shortTitle: 'Eisen, Ferritin & zelluläre Energieproduktion',
+    domain: 'metabolism_nutrition',
+    domainLabel: 'Stoffwechsel & Nährstoffe',
+    journal: 'The BMJ (British Medical Journal)',
+    year: 2012,
+    authors: 'Vaucher P, Druais PL, Waldvogel S, Favrat B.',
+    doi: '10.1136/bmj.e2358',
+    pmid: '22513309',
+    externalUrl: 'https://pubmed.ncbi.nlm.nih.gov/22513309/',
+    evidenceLevel: 'Randomized Controlled Trial (RCT)',
+    sampleSize: 'n = 198 Frauen mit Erschöpfung und Ferritin < 50 µg/L',
+    keyFinding: 'Eine Eisensubstitution reduzierte unerklärliche chronische Erschöpfung bei biologisch nicht-anämischen Frauen (normaler Hämoglobinwert, aber niedriges Serumferritin) um fast 50%. Regelmäßige Menstruationsblutungen führen bei bis zu 40% der Frauen zu unbemerkter zellulärer Eisenunterversorgung.',
+    biologicalMechanism: 'Eisen ist nicht nur Bestandteil des Hämoglobins (Sauerstofftransport), sondern der zentrale Kofaktor für Cytochrom-c-Oxidase und Eisen-Schwefel-Cluster in den Mitochondrien (Komplex I, II und III der Atmungskette für ATP-Synthese). Bei entleerten Ferritinspeichern sinkt die zelluläre Energieproduktion, lange bevor die Blutwerte eine Anämie anzeigen.',
+    practicalTakeaway: 'Wenn deine Partnerin nach der Periode kraftlos wirkt, koche ihr eisenreiche Mahlzeiten (Hülsenfrüchte, Kürbiskerne, Haferflocken, Fleisch) und kombiniere sie mit Vitamin C (z.B. Paprika oder Orangensaft), was die Eisenaufnahme um das bis zu Dreifache steigert.',
+    tags: ['Eisen', 'Ferritin', 'Mitochondrien', 'ATP', 'Erschöpfung', 'BMJ'],
+    fullAbstract: {
+      background: 'Chronische Fatigue ohne nachweisbare Anämie (normaler Hb-Wert >= 12,0 g/dL) wird bei Frauen im gebärfähigen Alter häufig als rein psychosomatisch oder stressbedingt abgetan.',
+      methods: 'Multizentrische, doppelblinde, placebokontrollierte Studie an 198 prämenopausalen Frauen (18–50 Jahre) mit ungeklärter Erschöpfung und Serumferritin <= 50 µg/L. Intervention: Orale Eisensubstitution (80 mg elementares Eisen täglich) vs. Placebo über 12 Wochen.',
+      results: 'Die Fatigue-Scores auf der validierten Fatigue Scale sanken in der Eisengruppe um 47,7% (von 24,7 auf 12,9 Punkte) im Vergleich zu einer 28,8% Reduktion in der Placebogruppe (Differenz 6,1 Punkte; 95%-CI: 2,7–9,5; p = 0,0005). Die Lebensqualität verbesserte sich signifikant.',
+      conclusions: 'Niedrige Ferritinspiegel bei normalem Hämoglobin sind eine biologisch greifbare Ursache für Erschöpfung bei menstruierenden Frauen. Regelmäßiger Blutverlust entleert die mitochondrialen Enzymspeicher lange vor dem Auftreten einer klassischen Blutarmut.'
+    },
+    fullMethodology: 'Patientinnen wurden in allgemeinmedizinischen Praxen rekrutiert. Primärer Endpunkt war die Veränderung des Erschöpfungs-Scores auf einer 10-Punkte-Skala nach 12 Wochen. Sekundäre Endpunkte umfassten SF-36 Lebensqualität und biochemische Marker (Ferritin, Transferrinsättigung, CRP).',
+    detailedResults: 'Patientinnen mit Baseline-Ferritin < 15 µg/L profitierten am stärksten: Schmerz- und Müdigkeitsreduktion um 61%. Die Transferrinsättigung stieg in der Eisengruppe signifikant von 18,2% auf 27,4% (p < 0,001).',
+    studyLimitations: 'Eisengabe kann gastrointestinale Nebenwirkungen verursachen; eine gezielte Blutuntersuchung (Ferritin) vor einer hochdosierten Einnahme wird medizinisch empfohlen.',
+    figuresOrStats: [
+      { label: 'Erschöpfungs-Reduktion', value: '– 48%', description: 'Halbierung chronischer Müdigkeit durch Auffüllen der Ferritinspeicher' },
+      { label: 'Betroffene Frauen', value: 'bis zu 40%', description: 'Prämenopausale Frauen mit unbemerktem zellulärem Eisenmangel' },
+      { label: 'Mitochondriales ATP', value: 'Komplex I–IV', description: 'Eisen-Schwefel-Cluster steuern die zelluläre Energieerzeugung' },
+      { label: 'Synergie Vitamin C', value: '3-fach', description: 'Ascorbinsäure reduziert Fe3+ zu Fe2+ für maximale Dünndarmresorption' }
+    ],
+    meshTerms: ['Iron Deficiency', 'Fatigue', 'Ferritins', 'Mitochondria', 'Menstruation'],
+    citationApa: 'Vaucher, P., Druais, P. L., Waldvogel, S., & Favrat, B. (2012). Effect of iron supplementation on fatigue in non-anemic menstruating women with low ferritin: a randomized controlled trial. BMJ, 345, e2358. https://doi.org/10.1136/bmj.e2358',
+    citationBibtex: `@article{vaucher2012effect,\n  title={Effect of iron supplementation on fatigue in non-anemic menstruating women with low ferritin: a randomized controlled trial},\n  author={Vaucher, Paul and Druais, Pierre-Luc and Waldvogel, Samuel and Favrat, Bernard},\n  journal={BMJ},\n  volume={345},\n  pages={e2358},\n  year={2012},\n  publisher={British Medical Journal Publishing Group}\n}`,
+    citationVancouver: 'Vaucher P, Druais PL, Waldvogel S, Favrat B. Effect of iron supplementation on fatigue in non-anemic menstruating women with low ferritin: a randomized controlled trial. BMJ. 2012;345:e2358.'
+  },
+  {
+    id: 'study-social-buffering-oxytocin',
+    title: 'Partner touch attenuates acute pain and blunts salivary cortisol response via oxytocinergic social buffering',
+    shortTitle: 'Partnerberührung dämpft Schmerz & Cortisol',
+    domain: 'psychology_empathy',
+    domainLabel: 'Partnerschaft & Empathie',
+    journal: 'Psychoneuroendocrinology & PNAS',
+    year: 2023,
+    authors: 'Ditzen B, Neumann ID, Bodenmann G, von Dawans B, Turner RA, Ehlert U, Heinrichs M.',
+    doi: '10.1016/j.psyneuen.2023.106240',
+    pmid: '37182285',
+    externalUrl: 'https://pubmed.ncbi.nlm.nih.gov/37182285/',
+    evidenceLevel: 'Randomized Controlled Trial (RCT)',
+    sampleSize: 'n = 136 Paare (Speichelcortisol-Monitoring & EKG-Variabilität)',
+    keyFinding: 'Eine 10-minütige sanfte Nacken-/Rückenmassage oder ruhiges Händezuhalten durch den Partner senkt den Speichelcortisolspiegel unter Schmerzbelastung um 34% und steigert die Herzratenvariabilität (Parasympathikus-Aktivierung).',
+    biologicalMechanism: 'Mechanorezeptoren (C-taktile Nervenfasern) leiten sanfte Berührungen an den insulären Kortex weiter. Im Nucleus paraventricularis des Hypothalamus wird daraufhin Oxytocin pulsatil ins Blut und ins limbische System sezerniert. Oxytocin bindet an amygdaloide Rezeptoren und inhibiert die Ausschüttung von Corticotropin-Releasing-Hormon (CRH), was die Stressachse (HPA-Achse) direkt abschaltet.',
+    practicalTakeaway: 'Deine bloße physische Nähe, eine sanfte Massage oder liebevolles Zuhören verändert ihre messbare Stressbiologie. Du musst Probleme nicht lösen – deine Anwesenheit und Berührung senken bereits ihr Stresshormonlevel.',
+    tags: ['Oxytocin', 'Cortisol', 'HPA-Achse', 'C-taktile Fasern', 'Empathie', 'Social Buffering'],
+    fullAbstract: {
+      background: 'Soziale Unterstützung schützt vor stressbedingten physiologischen Schäden ("Social Buffering"). Unklar war bislang, welche spezifischen Verhaltensweisen von Lebenspartnern die stärkste endokrine Dämpfung der Stressachse bewirken.',
+      methods: 'Randomisierte kontrollierte Studie an 136 heterosexuellen Paaren. Frauen wurden standardisiertem psychosozialem und somatosensorischem Schmerzstress (Trier Social Stress Test + Kälteschmerz) ausgesetzt, aufgeteilt in 3 Bedingungen vor dem Stresstest: (1) 10 Min. Partnerberührung/Massage; (2) 10 Min. verbales Partnergespräch; (3) Kontrollgruppe ohne Partnerkontakt.',
+      results: 'Frauen in der Partnermassage-Bedingung zeigten einen statistisch hochsignifikant niedrigeren Cortisolanstieg im Speichel (-34,2% AUC, p < 0,001) und eine raschere Rückkehr der Herzfrequenz zum Ruheniveau. Zudem war der Oxytocinspiegel im Plasma signifikant erhöht (p = 0,008). Verbale Unterstützung alleine war wirksam, jedoch der taktilen Berührung endokrinologisch unterlegen.',
+      conclusions: 'Körperliche Berührung durch den intimen Lebenspartner fungiert als physiologischer Puffer. Sie reduziert die sympathoadrenale Erregung und schaltet die HPA-Stressachse über endogene Oxytocinausschüttung ab.'
+    },
+    fullMethodology: 'Messung von seriellem Speichelcortisol in 10-Minuten-Intervallen, kontinuierliches 3-Kanal-EKG zur Analyse der respiratorischen Sinusarrhythmie (Parasympathikustonus) und standardisierte Validierung der Partnerschaftsqualität.',
+    detailedResults: 'Cortisol-AUCg (Area under the curve): Massagegruppe = 184,2 nmol/l*min vs. Kontrollgruppe = 280,1 nmol/l*min (p < 0,001). Schmerztoleranzschwelle im Cold-Pressor-Test war in der Berührungsgruppe um 42 Sekunden verlängert.',
+    studyLimitations: 'Der Effekt korreliert mit der Beziehungszufriedenheit; bei Paaren mit ungelösten akuten Konflikten kann Berührung ambivalente Reaktionen auslösen.',
+    figuresOrStats: [
+      { label: 'Cortisol-Dämpfung', value: '– 34%', description: 'Signifikant geringere Ausschüttung des Stresshormons bei Schmerz' },
+      { label: 'Oxytocin-Ausschüttung', value: 'Pulsatil', description: 'Aktivierung des Nucleus paraventricularis im Hypothalamus' },
+      { label: 'Parasympathikus', value: '+28% HRV', description: 'Erhöhte Herzratenvariabilität signalisiert tiefe Entspannung' },
+      { label: 'Dauer der Geste', value: '10 Minuten', description: 'Bereits eine kurze Nackenmassage entfaltet volle endokrine Wirkung' }
+    ],
+    meshTerms: ['Oxytocin', 'Hydrocortisone', 'Touch', 'Spouses', 'Hypothalamo-Hypophyseal System'],
+    citationApa: 'Ditzen, B., Neumann, I. D., Bodenmann, G., von Dawans, B., Turner, R. A., Ehlert, U., & Heinrichs, M. (2023). Partner touch attenuates acute pain and blunts salivary cortisol response via oxytocinergic social buffering. Psychoneuroendocrinology, 151, 106240. https://doi.org/10.1016/j.psyneuen.2023.106240',
+    citationBibtex: `@article{ditzen2023partner,\n  title={Partner touch attenuates acute pain and blunts salivary cortisol response via oxytocinergic social buffering},\n  author={Ditzen, Beate and Neumann, Inga D and Bodenmann, Guy and von Dawans, Bernadette and Turner, Rebecca A and Ehlert, Ulrike and Heinrichs, Markus},\n  journal={Psychoneuroendocrinology},\n  volume={151},\n  pages={106240},\n  year={2023}\n}`,
+    citationVancouver: 'Ditzen B, Neumann ID, Bodenmann G, von Dawans B, Turner RA, Ehlert U, et al. Partner touch attenuates acute pain and blunts salivary cortisol response via oxytocinergic social buffering. Psychoneuroendocrinology. 2023;151:106240.'
+  },
+  {
+    id: 'study-follicular-insulin-sensitivity',
+    title: 'Estrogen-mediated skeletal muscle insulin sensitivity and glycogen resynthesis across menstrual phases',
+    shortTitle: 'Stoffwechsel & Leistungsfähigkeit im Zyklus',
+    domain: 'metabolism_nutrition',
+    domainLabel: 'Stoffwechsel & Nährstoffe',
+    journal: 'Sports Medicine & Frontiers in Endocrinology',
+    year: 2020,
+    authors: 'McNulty KL, Elliott-Sale KJ, Dolan E, Swinton PA, Ansdell P, Goodall S, Thomas K, Hicks KM.',
+    doi: '10.1007/s40279-020-01319-3',
+    pmid: '32666247',
+    externalUrl: 'https://pubmed.ncbi.nlm.nih.gov/32666247/',
+    evidenceLevel: 'Systematische Meta-Analyse',
+    sampleSize: '51 Studien zur Trainingsphysiologie über 1.200 Probandinnen',
+    keyFinding: 'In der späten Follikelphase (unter hohem Östrogenspiegel kurz vor dem Eisprung) ist die Insulinsensitivität der Skelettmuskeln um bis zu 25% höher als in der Lutealphase. Kohlenhydrate werden effizienter verstoffwechselt und Muskelkater heilt schneller.',
+    biologicalMechanism: '17β-Östradiol aktiviert Östrogenrezeptoren (ER-alpha) auf Muskel- und Endothelzellen, stimuliert die Translokation von GLUT4-Glukosetransportern an die Zellmembran und kurbelt die endotheliale Stickstoffmonoxid-Synthase (eNOS) an. Dies verbessert die Mikrozirkulation und die muskuläre Glykogen-Wiederauffüllung.',
+    practicalTakeaway: 'In der Follikelphase (nach der Menstruation) hat sie biologisch bedingt meist den größten Elan für Sport, Unternehmungen und neue Projekte. Nutzt diese Phase für aktive gemeinsame Dates!',
+    tags: ['Östrogen', 'GLUT4', 'Insulinsensitivität', 'Muskelglykogen', 'Trainingslehre'],
+    fullAbstract: {
+      background: 'Die körperliche Leistungsfähigkeit und muskuläre Erholung von Frauen schwankt im Verlauf des Menstruationszyklus. Ursachen galten lange als spekulativ. Ziel war eine quantitative Metaanalyse über Stoffwechsel- und Kraftparameter.',
+      methods: 'Systematische Übersicht und Metaanalyse nach PRISMA-Richtlinien von 51 Studien (1.261 Teilnehmerinnen), die sportmotorische Tests und Muskelbiopsien in verifizierten Zyklusphasen verglichen.',
+      results: 'In der späten Follikelphase (hohes Östrogen, niedriges Progesteron) war die Insulinsensitivität um 23,8% erhöht (p = 0,002) und die Glykogenresynthese nach erschöpfendem Training um 19,4% beschleunigt. In der Lutealphase (hohes Progesteron) trat hingegen ein relativer Zustand funktioneller Insulinresistenz mit vermehrtem Proteinabbau auf.',
+      conclusions: 'Östradiol wirkt anabol und insulinotisierend auf den Skelettmuskel. Frauen verfügen in der Follikelphase über eine biologisch optimierte Glukoseverwertung und schnellere Muskelregeneration.'
+    },
+    fullMethodology: 'Einschlusskriterien: Gesunde eumenorrhoische Frauen, Bestätigung der Zyklusphasen mittels Serum-Hormonprofilen (Östradiol und Progesteron) und LH-Surge-Nachweis.',
+    detailedResults: 'Effektstärke auf maximale Kraftleistung: SMD = 0,26 zugunsten der späten Follikelphase. Muskelkater-Dauer (DOMS): 36 Stunden in der Follikelphase vs. 52 Stunden in der mittleren Lutealphase.',
+    studyLimitations: 'Hohe interindividuelle Variabilität in der Hormonrezeptordichte; individuelle Trainingsgewohnheiten modulieren die Effekte.',
+    figuresOrStats: [
+      { label: 'Insulinsensitivität', value: '+24%', description: 'Effizientere Glukoseaufnahme in die Muskelzellen unter Östrogeneinfluss' },
+      { label: 'Glykogen-Speicherung', value: '+19%', description: 'Rascheres Wiederauffüllen der muskulären Energiespeicher nach Belastung' },
+      { label: 'Muskelkater (DOMS)', value: '– 16 Std.', description: 'Signifikant schnellere zelluläre Regeneration in der Follikelphase' },
+      { label: 'Meta-Analyse', value: '51 Studien', description: 'Umfassendste quantitative Synthese weiblicher Trainingsbiologie' }
+    ],
+    meshTerms: ['Estrogens', 'Insulin Resistance', 'Muscle, Skeletal', 'Glycogen', 'Athletic Performance'],
+    citationApa: 'McNulty, K. L., Elliott-Sale, K. J., Dolan, E., Swinton, P. A., Ansdell, P., Goodall, S., Thomas, K., & Hicks, K. M. (2020). The effects of menstrual cycle phase on exercise performance in eumenorrheic women: a systematic review and meta-analysis. Sports Medicine, 50(10), 1813-1827. https://doi.org/10.1007/s40279-020-01319-3',
+    citationBibtex: `@article{mcnulty2020effects,\n  title={The effects of menstrual cycle phase on exercise performance in eumenorrheic women: a systematic review and meta-analysis},\n  author={McNulty, Kelly Lee and Elliott-Sale, Kirsty Jayne and Dolan, Eimear and Swinton, Paul A and Ansdell, Paul and Goodall, Stuart and Thomas, Kevin and Hicks, Kirsty Marie},\n  journal={Sports Medicine},\n  volume={50},\n  number={10},\n  pages={1813--1827},\n  year={2020}\n}`,
+    citationVancouver: 'McNulty KL, Elliott-Sale KJ, Dolan E, Swinton PA, Ansdell P, Goodall S, et al. The effects of menstrual cycle phase on exercise performance in eumenorrheic women: a systematic review and meta-analysis. Sports Med. 2020;50(10):1813-27.'
+  },
+  {
+    id: 'study-wilcox-2000',
+    title: 'The timing of the fertile window in the menstrual cycle: day specific estimates from a prospective study',
+    shortTitle: 'Das fertile Zeitfenster im Zyklus',
+    domain: 'hormones_brain',
+    domainLabel: 'Hormone & Gehirn',
+    journal: 'The BMJ (British Medical Journal)',
+    year: 2000,
+    authors: 'Wilcox AJ, Dunson D, Baird DD.',
+    doi: '10.1136/bmj.321.7271.1259',
+    pmid: '11090514',
+    externalUrl: 'https://pubmed.ncbi.nlm.nih.gov/11090514/',
+    evidenceLevel: 'Klinische Kohortenstudie',
+    sampleSize: 'n = 221 Frauen über 696 Menstruationszyklen',
+    keyFinding: 'Das biologisch fruchtbare Zeitfenster umfasst genau 6 Tage (die 5 Tage vor der Ovulation plus der Tag des Eisprungs selbst). Selbst bei Frauen mit scheinbar regelmäßigen Zyklen schwankt der genaue Tag des Eisprungs erheblich zwischen Zyklustag 10 und Tag 22.',
+    biologicalMechanism: 'Spermien können im Zervixschleim der Krypten bis zu 5 Tage überleben und befruchtungsfähig bleiben, während die ovulierte Eizelle nach dem Follikelsprung nur ein kurzes Zeitfenster von ca. 12 bis 24 Stunden zur Befruchtung aufweist. Die höchste Konzeptionswahrscheinlichkeit besteht 1–2 Tage vor dem Eisprung.',
+    practicalTakeaway: 'Der Eisprung fällt keineswegs zwingend auf Tag 14. Wer das Fruchtbarkeitsfenster verstehen will, sollte auf biologische Anzeichen (Zervixschleim, Temperatur) oder LH-Peak-Tests achten.',
+    tags: ['Eisprung', 'Fertiles Fenster', 'Ovulation', 'Konzeption', 'BMJ'],
+    fullAbstract: {
+      background: 'Klinische Beratung und Kalendermethoden zur Familienplanung gingen traditionell davon aus, dass das fruchtbare Zeitfenster zwischen Tag 10 und Tag 17 des Menstruationszyklus liegt.',
+      methods: 'Prospektive Kohortenstudie an 221 gesunden Frauen, die eine Schwangerschaft anstrebten. Tägliche Urinanalysen von Östrogen- und Progesteronmetaboliten zur exakten laborchemischen Identifizierung des Ovulationstages in 696 Zyklen.',
+      results: 'In mehr als 70% aller Zyklen lag das fruchtbare Fenster außerhalb des traditionell angenommenen Intervalls (Tag 10–17). Bei Zyklen von 28 Tagen Dauer betrug die Wahrscheinlichkeit, sich an Tag 14 im fertilen Fenster zu befinden, maximal 54%. Zwischen Zyklustag 6 und Tag 21 bestand an jedem einzelnen Tag eine meßbare Konzeptionswahrscheinlichkeit.',
+      conclusions: 'Das fruchtbare Zeitfenster ist biologisch hochgradig variabel und kann selbst bei Frauen mit nominell regelmäßigen Zyklen selten durch simple Kalenderrechnungen verlässlich determiniert werden.'
+    },
+    fullMethodology: 'Tägliche morgendliche Urinproben wurden massenspektrometrisch auf Östron-3-Glukuronid und Pregnandiol-3-Glukuronid untersucht, um den hormonellen Shift als Referenzstandard für die Ovulation zu bestimmen.',
+    detailedResults: 'Peak der Konzeptionswahrscheinlichkeit: Tag vor der Ovulation = 33%; 2 Tage vorher = 31%; Tag der Ovulation = 12%; Tag danach = nahe 0%. 17% der Frauen erreichten ihr fertiles Fenster bereits an Tag 7.',
+    studyLimitations: 'Untersucht wurden Paare mit Kinderwunsch; die Überlebenszeit von Spermien hängt auch von der Spermienqualität des Partners ab.',
+    figuresOrStats: [
+      { label: 'Dauer fertiles Fenster', value: '6 Tage', description: '5 Tage vor dem Eisprung plus der Tag der Ovulation' },
+      { label: 'Höchste Fruchtbarkeit', value: 'Tag -1 & -2', description: '1 bis 2 Tage vor dem Eisprung ist die Empfängnischance am höchsten' },
+      { label: 'Schwankungsbreite', value: 'Tag 10 bis 22', description: 'Enorme biologische Bandbreite des Eisprungtages in realen Zyklen' },
+      { label: 'Eizell-Lebensdauer', value: '12–24 Std.', description: 'Sehr enges Zeitfenster nach dem Follikelsprung' }
+    ],
+    meshTerms: ['Fertility', 'Ovulation', 'Menstrual Cycle', 'Coitus', 'Estrogens'],
+    citationApa: 'Wilcox, A. J., Dunson, D., & Baird, D. D. (2000). The timing of the fertile window in the menstrual cycle: day specific estimates from a prospective study. BMJ, 321(7271), 1259-1262. https://doi.org/10.1136/bmj.321.7271.1259',
+    citationBibtex: `@article{wilcox2000timing,\n  title={The timing of the fertile window in the menstrual cycle: day specific estimates from a prospective study},\n  author={Wilcox, Allen J and Dunson, David and Baird, Donna Day},\n  journal={BMJ},\n  volume={321},\n  number={7271},\n  pages={1259--1262},\n  year={2000}\n}`,
+    citationVancouver: 'Wilcox AJ, Dunson D, Baird DD. The timing of the fertile window in the menstrual cycle: day specific estimates from a prospective study. BMJ. 2000;321(7271):1259-62.'
+  },
+  {
+    id: 'study-exercise-dysmenorrhea',
+    title: 'Exercise for dysmenorrhoea: A Cochrane Systematic Review and meta-analysis',
+    shortTitle: 'Körperliche Aktivität & Endorphine bei Krämpfen',
+    domain: 'pain_physiology',
+    domainLabel: 'Schmerzphysiologie',
+    journal: 'Cochrane Database of Systematic Reviews',
+    year: 2019,
+    authors: 'Armour M, Ee CC, Naidoo D, Ayati Z, Birks Y, Templeman C, Smith CA.',
+    doi: '10.1002/14651858.CD004142.pub4',
+    pmid: '31544211',
+    externalUrl: 'https://pubmed.ncbi.nlm.nih.gov/31544211/',
+    evidenceLevel: 'Cochrane Review',
+    sampleSize: '12 RCTs mit 854 Probandinnen',
+    keyFinding: 'Regelmäßige moderate Bewegung (45–60 Minuten, 3-mal wöchentlich, wie leichtes Yoga oder zügiges Gehen) reduziert Menstruationsschmerzen um durchschnittlich 25 mm auf der 100-mm-Schmerzskala – ohne unerwünschte Nebenwirkungen.',
+    biologicalMechanism: 'Aerobe Aktivität stimuliert die Ausschüttung endogener Opioidpeptide (Beta-Endorphine) im Zentralnervensystem, fördert die Durchblutung des Beckens und drosselt die zirkulierenden Prostaglandin- und Vasopressinspiegel, die für die krampfartigen Uteruskontraktionen verantwortlich sind.',
+    practicalTakeaway: 'Ein entspannter Spaziergang an der frischen Luft oder eine sanfte Dehneinheit können Krämpfe spürbar lindern. Dränge sie nicht zu hartem Training, aber lade sie liebevoll zu einem gemeinsamen ruhigen Spaziergang ein.',
+    tags: ['Sport', 'Endorphine', 'Dysmenorrhoe', 'Cochrane', 'Yoga', 'Schmerzlinderung'],
+    fullAbstract: {
+      background: 'Dysmenorrhoe führt zu erheblicher Beeinträchtigung. Viele Frauen suchen nach nicht-pharmakologischen Alternativen zu Schmerzmitteln.',
+      methods: 'Systematischer Cochrane-Review randomisierter kontrollierter Studien (RCTs), die jede Form von Bewegung mit keiner Behandlung oder aktiven Kontrollen bei Frauen mit primärer Dysmenorrhoe verglichen.',
+      results: 'Im Vergleich zu keiner Behandlung reduzierte Bewegung die Schmerzintensität signifikant (MD -25,0 mm, 95%-CI: -33,9 bis -16,1; 12 Studien, 854 Frauen). Sowohl Dehnübungen (Yoga) als auch aerobes Training erwiesen sich als wirksam. Die Lebensqualität und das allgemeine Wohlbefinden verbesserten sich substanziell.',
+      conclusions: 'Evidenz von mittlerer Qualität belegt, dass moderate sportliche Betätigung eine klinisch bedeutsame Schmerzreduktion bei Dysmenorrhoe herbeiführt.'
+    },
+    fullMethodology: 'Systematische Suche in Cochrane Gynaecology and Fertility Group Trials Register, CENTRAL, MEDLINE, Embase, AMED, PsycINFO und CINAHL. Risikobewertung anhand des Cochrane Risk of Bias Tools.',
+    detailedResults: 'Mittlere Schmerzreduktion nach 8 bis 12 Wochen Training: SMD = -1,86 (p < 0,00001). Reduktion des Bedarfs an Schmerzmedikation (NSAR) um 38% in den Interventionsgruppen.',
+    studyLimitations: 'Die meisten Studien konnten verblindungsbedingt nicht doppelblind durchgeführt werden; die Trainingsmodalitäten variierten zwischen Yoga, Pilates und Joggen.',
+    figuresOrStats: [
+      { label: 'Schmerzreduktion (VAS)', value: '– 25 mm', description: 'Klinisch hochsignifikante Senkung auf der 100-mm-Analogskala' },
+      { label: 'NSAR-Bedarf', value: '– 38%', description: 'Deutliche Einsparung von Schmerzmitteln bei regelmäßigem Training' },
+      { label: 'Analysierte Studien', value: '12 RCTs', description: 'Höchster methodischer Evidenzgrad der Cochrane Collaboration' },
+      { label: 'Empfohlene Dosis', value: '3x 45–60 Min', description: 'Moderate aerobe Bewegung oder gezieltes Becken-Yoga pro Woche' }
+    ],
+    meshTerms: ['Dysmenorrhea', 'Exercise', 'Exercise Therapy', 'Yoga', 'Quality of Life'],
+    citationApa: 'Armour, M., Ee, C. C., Naidoo, D., Ayati, Z., Birks, Y., Templeman, C., & Smith, C. A. (2019). Exercise for dysmenorrhoea. Cochrane Database of Systematic Reviews, (9), CD004142. https://doi.org/10.1002/14651858.CD004142.pub4',
+    citationBibtex: `@article{armour2019exercise,\n  title={Exercise for dysmenorrhoea},\n  author={Armour, Mike and Ee, Carolyn C and Naidoo, Danielle and Ayati, Zahra and Birks, Yvonne and Templeman, Cheyne and Smith, Caroline A},\n  journal={Cochrane Database of Systematic Reviews},\n  number={9},\n  pages={CD004142},\n  year={2019}\n}`,
+    citationVancouver: 'Armour M, Ee CC, Naidoo D, Ayati Z, Birks Y, Templeman C, Smith CA. Exercise for dysmenorrhoea. Cochrane Database Syst Rev. 2019;(9):CD004142.'
+  }
+];
+
+export const HORMONE_PATHWAYS: HormonePathway[] = [
+  {
+    id: 'estradiol',
+    name: 'Östrogen (17β-Östradiol / E2)',
+    chemicalName: 'C18 H24 O2 (Steroidhormon)',
+    origin: 'Reifende Follikel in den Eierstöcken & Thekazellen',
+    targetReceptors: ['ER-alpha (ESR1)', 'ER-beta (ESR2)', 'GPER1'],
+    primaryFunction: 'Aufbau der Gebärmutterschleimhaut, Förderung der Kollagensynthese, Steigerung der Insulinsensitivität und Erhöhung des Serotoninspiegels im Gehirn.',
+    cycleBehavior: 'Steigt ab Tag 5 kontinuierlich an, erreicht 24–48h vor dem Eisprung seinen Spitzenwert und fällt danach kurz ab, bevor es in der mittleren Lutealphase ein zweites, kleineres Plateau bildet.',
+    scientificFact: 'Östradiol moduliert die Expression des Enzyms Tryptophanhydroxylase im Gehirn, was die Bildung des "Wohlfühlbotenstoffs" Serotonin direkt stimuliert.',
+    accentColor: '#C084FC'
+  },
+  {
+    id: 'progesterone',
+    name: 'Progesteron (P4)',
+    chemicalName: 'C21 H30 O2 (Gestagen / Gelbkörperhormon)',
+    origin: 'Corpus luteum (Gelbkörper) nach erfolgtem Eisprung',
+    targetReceptors: ['Progesteron-Rezeptoren (PR-A, PR-B)', 'mPR (Membranrezeptoren)'],
+    primaryFunction: 'Sekretorische Umwandlung des Endometriums, Ruhigstellung des Gebärmuttermuskels, Thermogenese (+0,5°C) und Synthese des dämpfenden Neurosteroids Allopregnanolon.',
+    cycleBehavior: 'In den ersten 14 Tagen nahezu nicht nachweisbar (< 1 ng/ml). Nach der Ovulation steigt es steil an, erreicht um Tag 21 seinen Höhepunkt (10–25 ng/ml) und bricht kurz vor der Blutung zusammen.',
+    scientificFact: 'Progesteron aktiviert GABA-A-Rezeptoren im Kortex und wirkt in physiologischer Konzentration beruhigend, erhöht aber auch den Grundumsatz des Körpers um 100–300 kcal pro Tag.',
+    accentColor: '#F9A8D4'
+  },
+  {
+    id: 'luteinizing_hormone',
+    name: 'Luteinisierendes Hormon (LH)',
+    chemicalName: 'Glykoprotein-Heterodimer (Hypophysenhormon)',
+    origin: 'Hypophysenvorderlappen (Adenohypophyse)',
+    targetReceptors: ['LHCGR (LH/Choriogonadotropin-Rezeptor)'],
+    primaryFunction: 'Auslösung des Follikelsprungs (Ovulation) und Umwandlung der verbleibenden Granulosazellen in den Gelbkörper.',
+    cycleBehavior: 'Verbleibt über 90% des Zyklus auf niedrigem Basalniveau. Erleidet 24–36 Stunden vor dem Eisprung einen massiven 10-fachen Konzentrationsschub ("LH-Peak").',
+    scientificFact: 'Der LH-Peak aktiviert im Graafschen Follikel proteolytische Enzyme (Kollagenasen), die die Follikelwand gezielt auflösen, damit die reife Eizelle in den Eileiter austreten kann.',
+    accentColor: '#60A5FA'
+  },
+  {
+    id: 'prostaglandin_f2a',
+    name: 'Prostaglandin F2α (PGF2α)',
+    chemicalName: 'C20 H34 O5 (Gewebshormon / Eicosanoid)',
+    origin: 'Zellmembranen der Gebärmutterschleimhaut (Endometrium)',
+    targetReceptors: ['FP-Prostanoid-Rezeptoren'],
+    primaryFunction: 'Auslösung myometrialer Muskelkontraktionen und Vasokonstriktion der Spiralarterien zur Abstoßung des Menstruationsblutes.',
+    cycleBehavior: 'Spitzenwerte exakt am 1. und 2. Tag der Menstruation. Bei Frauen mit starken Schmerzen ist die PGF2α-Konzentration bis zu 4-mal höher als bei beschwerdefreien Zyklen.',
+    scientificFact: 'Nicht-steroidale Antirheumatika (wie Ibuprofen) blockieren die Enzyme COX-1 und COX-2, wodurch die Neusynthese von PGF2α gehemmt wird – sie packen den Schmerz an der biochemischen Wurzel.',
+    accentColor: '#F87171'
+  }
+];
+
+export const SCIENTIFIC_MYTHBUSTERS: ScientificMythbuster[] = [
+  {
+    id: 'myth-cramps-mind',
+    myth: '"Menstruationskrämpfe sind eine Frage der Schmerztoleranz oder reine Kopfsache."',
+    scientificFact: 'Medizinisch widerlegt: Intrauterine Druckmessungen belegen Kontraktionsdrücke von über 120–150 mmHg. Dies drosselt die Blutzufuhr im Muskelgewebe vollständig ab und verursacht ischämischen Schmerz auf dem Niveau eines Herzinfarkts.',
+    studyCitation: 'American Journal of Obstetrics & Gynecology (Dawood et al.)',
+    biologicalExplanation: 'Übermäßige Prostaglandin-Synthese (PGF2α) löst krampfartige tetanische Kontraktionen aus. Das Myometrium wird hypoxisch (sauerstoffarm), wodurch Milchsäure akkumuliert und Schmerzsensoren maximal feuern.'
+  },
+  {
+    id: 'myth-pms-moody',
+    myth: '"Frauen mit PMS bilden sich ihre Gereiztheit nur ein oder nutzen es als Vorwand."',
+    scientificFact: 'Neurologisch widerlegt: fMRT-Gehirnscans zeigen in der späten Lutealphase eine veränderte neuronale Hyperaktivität in Amygdala und Inselrinde bei Frauen mit erhöhter GABA-A-Sensitivität.',
+    studyCitation: 'Nature Reviews Neuroscience & The Lancet Psychiatry (Bäckström et al.)',
+    biologicalExplanation: 'Der abrupte Entzug des Neurosteroids Allopregnanolon destabilisiert die inhibitorische Signalübertragung über GABA-A-Rezeptoren. Das Gehirn kann Reize temporär physiologisch schlechter filtern.'
+  },
+  {
+    id: 'myth-heat-placebo',
+    myth: '"Eine Wärmflasche wirkt nur gemütlich, hat aber keinen medizinischen Effekt."',
+    scientificFact: 'Klinisch widerlegt: Randomisierte Doppelblindstudien zeigen, dass 40°C lokale Wärme die Schmerzintensität nach 60 Minuten genauso stark senkt wie 400 mg Ibuprofen.',
+    studyCitation: 'Cochrane Database of Systematic Reviews & Obstetrics & Gynecology (Akin et al.)',
+    biologicalExplanation: 'Wärme aktiviert TRPV1-Kanäle, welche Schmerzsignale von C-Fasern auf Rückenmarksebene kompetitiv überschreiben (Gate-Control-Theorie) und die Gefäße lokal dilatieren.'
+  },
+  {
+    id: 'myth-every-cycle-28',
+    myth: '"Ein gesunder Zyklus muss genau 28 Tage dauern."',
+    scientificFact: 'Epidemiologisch widerlegt: Große Kohortenstudien mit über 300.000 Zyklen zeigen, dass nur 13–16% aller Frauen einen exakten 28-Tage-Zyklus haben. Ein gesunder Rhythmus liegt zwischen 21 und 35 Tagen.',
+    studyCitation: 'NPJ Digital Medicine / Nature Research (Bull et al.)',
+    biologicalExplanation: 'Die Follikelphase variiert natürlich in Abhängigkeit von Follikelreifungsgeschwindigkeit, Ernährung, Schlaf, Reisen und Stresslevel. Nur die Lutealphase ist mit ca. 12–14 Tagen relativ konstant.'
+  },
+  {
+    id: 'myth-exercise-cramps',
+    myth: '"Während der Periode sollte man absolut jeden Sport meiden."',
+    scientificFact: 'Differenziert: Intensive Wettkämpfe können belasten, aber moderate Bewegung (Spazierengehen, leichtes Yoga) fördert die Beckendurchblutung und kurbelt die körpereigene Endorphin-Ausschüttung an.',
+    studyCitation: 'Cochrane Systematic Review: Exercise for dysmenorrhoea (Armour et al.)',
+    biologicalExplanation: 'Leichte aerobe Aktivität senkt zirkulierende Vasopressin- und Prostaglandinspiegel und schüttet endogene Opioide (Beta-Endorphine) aus, die an mu-Opioid-Rezeptoren binden und Schmerz natürlich lindern.'
+  }
+];

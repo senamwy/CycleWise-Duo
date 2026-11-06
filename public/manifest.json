@@ -1,0 +1,20 @@
+{
+  "id": "/",
+  "name": "CycleWise Duo",
+  "short_name": "CycleWise",
+  "description": "Premium couples wellness SaaS helping boyfriends understand the menstrual cycle, support their partner thoughtfully, and grow together.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#101018",
+  "theme_color": "#101018",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
